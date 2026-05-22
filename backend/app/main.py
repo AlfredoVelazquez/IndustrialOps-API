@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.api.health import router as health_router
+from app.api.machine_routes import router as machine_router
 
 app = FastAPI(
     title="IndustrialOps API",
@@ -8,6 +9,7 @@ app = FastAPI(
 )
 
 app.include_router(health_router)
+app.include_router(machine_router)
 
 
 @app.get("/")
