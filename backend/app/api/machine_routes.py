@@ -48,9 +48,23 @@ def create_new_machine(
     response_model=list[MachineResponse],
 )
 def read_machines(
+    search: str | None = None,
+    is_active: bool | None = None,
+    order_by: str = "id",
+    order_direction: str = "asc",
+    limit: int = 100,
+    offset: int = 0,
     db: Session = Depends(get_db),
 ):
-    return get_machines(db)
+    return get_machines(
+        db=db,
+        search=search,
+        is_active=is_active,
+        order_by=order_by,
+        order_direction=order_direction,
+        limit=limit,
+        offset=offset,
+    )
 
 
 @router.get(
