@@ -7,6 +7,7 @@ from app.schemas.machine_schema import (
     MachineCreate,
     MachineUpdate,
     MachineResponse,
+    MachinePaginatedResponse,
 )
 
 from app.services.machine_service import (
@@ -45,7 +46,7 @@ def create_new_machine(
 
 @router.get(
     "",
-    response_model=list[MachineResponse],
+    response_model=MachinePaginatedResponse,
 )
 def read_machines(
     search: str | None = None,

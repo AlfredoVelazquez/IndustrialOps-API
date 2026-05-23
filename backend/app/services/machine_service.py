@@ -53,6 +53,8 @@ def get_machines(
     if is_active is not None:
         query = query.filter(Machine.is_active == is_active)
 
+    total = query.count()
+
     allowed_order_fields = {
         "id": Machine.id,
         "code": Machine.code,
@@ -68,7 +70,14 @@ def get_machines(
     else:
         query = query.order_by(order_column.asc())
 
-    return query.offset(offset).limit(limit).all()
+    machines = query.offset(offset).limit(limit).all()
+
+    return {
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+        "data": machines,
+    }
 
 def get_machine_by_id(db: Session, machine_id: int):
     return db.query(Machine).filter(Machine.id == machine_id).first()

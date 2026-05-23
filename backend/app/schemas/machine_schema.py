@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
+from typing import List
 
 
 class MachineBase(BaseModel):
@@ -43,3 +44,11 @@ class MachineResponse(MachineBase):
 
     class Config:
         from_attributes = True
+
+
+class MachinePaginatedResponse(BaseModel):
+    total: int
+    limit: int
+    offset: int
+    data: List[MachineResponse]
+
