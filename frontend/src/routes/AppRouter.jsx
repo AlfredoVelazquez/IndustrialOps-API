@@ -3,6 +3,7 @@ import MainLayout from '../layouts/MainLayout'
 import LoginPage from '../pages/LoginPage'
 import DashboardPage from '../pages/DashboardPage'
 import ProtectedRoute from './ProtectedRoute'
+import MachinesPage from '../pages/MachinesPage'
 
 function AppRouter() {
   return (
@@ -20,6 +21,7 @@ function AppRouter() {
         >
           <Route index element={<Navigate to="/dashboard" replace />} />
           <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="machines" element={<MachinesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
