@@ -1,33 +1,30 @@
-import { Outlet, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { Box } from '@mui/material'
+import { Outlet } from 'react-router-dom'
+import Navbar from '../components/layout/Navbar'
+import Sidebar from '../components/layout/Sidebar'
+
+const drawerWidth = 260
 
 function MainLayout() {
-  const navigate = useNavigate()
-  const { user, logout } = useAuth()
-
-  function handleLogout() {
-    logout()
-    navigate('/login')
-  }
-
   return (
-    <div>
-      <header>
-        <h2>IndustrialOps</h2>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f5f7fb' }}>
+      <Sidebar drawerWidth={drawerWidth} />
 
-        <p>
-          User: {user?.full_name} | Role: {user?.role}
-        </p>
+      <Box sx={{ flexGrow: 1 }}>
+        <Navbar drawerWidth={drawerWidth} />
 
-        <button type="button" onClick={handleLogout}>
-          Logout
-        </button>
-      </header>
-
-      <main>
-        <Outlet />
-      </main>
-    </div>
+        <Box
+          component="main"
+          sx={{
+            p: 3,
+            mt: 8,
+            minHeight: 'calc(100vh - 64px)',
+          }}
+        >
+          <Outlet />
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
